@@ -1,0 +1,56 @@
+---
+- name: configure the master redis server
+  hosts: redis-node2
+  roles:
+    - redis-new
+  become: true
+  become_method: sudo
+
+- name: configure the master redis server
+  hosts: redis-node3
+  roles:
+    - redis-new
+  become: true
+  become_method: sudo
+
+- name: configure the master redis server
+  hosts: redis-node4
+  roles:
+    - redis-new
+  become: true
+  become_method: sudo
+
+- name: configure the master redis server
+  hosts: redis-node5
+  roles:
+    - redis-new
+  become: true
+  become_method: sudo
+
+- name: configure the master redis server
+  hosts: redis-node6
+  roles:
+    - redis-new
+  become: true
+  become_method: sudo
+
+- name: configure the master redis server
+  hosts: redis-node1
+  roles:
+    - redis-new
+    - ruby-installation
+    - redis-cluster-creation
+  become: true
+  become_method: sudo
+
+#- name: configure redis slaves
+#  hosts: redis-slave
+#  vars:
+#    - redis_slaveof: "{{ groups['redis-master'][play_hosts.index(inventory_hostname)] }} 6379"
+#  roles:
+#    - redis-new
+#  become: true
+#  become_method: sudo
+
+
+       

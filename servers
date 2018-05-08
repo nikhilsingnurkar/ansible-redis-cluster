@@ -1,0 +1,14 @@
+[localhost]
+localhost
+[redis-node1]
+xx.xx.xx.xx
+[redis-node2]
+xx.xx.xx.xx
+[redis-node3]
+xx.xx.xx.xx
+[redis-node4]
+xx.xx.xx.xx
+[redis-node5]
+xx.xx.xx.xx
+[redis-node6]
+xx.xx.xx.xx

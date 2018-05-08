@@ -1,0 +1,49 @@
+---
+- name: "Install Common Libraries Required for ruby installation and cluster creation"
+  yum: state=present name={{ item }}
+  with_items:
+  - git-core 
+  - zlib 
+  - zlib-devel 
+  - patch 
+  - readline 
+  - readline-devel 
+  - libyaml-devel 
+  - libffi-devel 
+  - openssl-devel 
+  - make 
+  - bzip2 
+  - autoconf 
+  - automake 
+  - libtool 
+  - bison 
+  - curl 
+  - sqlite-devel
+  - gcc
+  - gcc-c++
+
+- name: Execute rbenv.sh file
+  shell: |
+    git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+    echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+    echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+    git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+    echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
+    exec $SHELL -l 
+
+
+- name: source bash_profile file
+  shell: source ~/.bash_profile
+
+
+- name: install rbenv install -v 2.5.1
+  shell: /home/compose/.rbenv/bin/rbenv install -v 2.5.1
+
+- name: set rbenv global 2.5.1
+  shell: /home/compose/.rbenv/bin/rbenv global 2.5.1
+
+- name: set gemrc
+  shell: "echo 'gem: --no-document' > ~/.gemrc"
+
+- name: gem install redis
+  shell: /home/compose/.rbenv/versions/2.5.1/bin/gem install redis
